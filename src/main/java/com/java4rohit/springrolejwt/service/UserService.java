@@ -1,7 +1,7 @@
-package com.akhianand.springrolejwt.service;
+package com.java4rohit.springrolejwt.service;
 
-import com.akhianand.springrolejwt.model.User;
-import com.akhianand.springrolejwt.model.UserDto;
+import com.java4rohit.springrolejwt.model.User;
+import com.java4rohit.springrolejwt.model.UserDto;
 
 import java.util.List;
 

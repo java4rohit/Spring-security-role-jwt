@@ -1,11 +1,11 @@
-package com.akhianand.springrolejwt.controller;
+package com.java4rohit.springrolejwt.controller;
 
-import com.akhianand.springrolejwt.config.TokenProvider;
-import com.akhianand.springrolejwt.model.AuthToken;
-import com.akhianand.springrolejwt.model.LoginUser;
-import com.akhianand.springrolejwt.model.User;
-import com.akhianand.springrolejwt.model.UserDto;
-import com.akhianand.springrolejwt.service.UserService;
+import com.java4rohit.springrolejwt.config.TokenProvider;
+import com.java4rohit.springrolejwt.model.AuthToken;
+import com.java4rohit.springrolejwt.model.LoginUser;
+import com.java4rohit.springrolejwt.model.User;
+import com.java4rohit.springrolejwt.model.UserDto;
+import com.java4rohit.springrolejwt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,8 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -34,7 +32,6 @@ public class UserController {
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> generateToken(@RequestBody LoginUser loginUser) throws AuthenticationException {
-
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginUser.getUsername(),
@@ -51,18 +48,16 @@ public class UserController {
         return userService.save(user);
     }
 
-
-
-    @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(value="/adminping", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ABM')")
+    @RequestMapping(value="/shipment-details", method = RequestMethod.GET)
     public String adminPing(){
-        return "Only Admins Can Read This";
+        return "Client ABM Can Read This";
     }
 
-    @PreAuthorize("hasRole('USER')")
-    @RequestMapping(value="/userping", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('WAVE')")
+    @RequestMapping(value="/cartonStatus", method = RequestMethod.GET)
     public String userPing(){
-        return "Any User Can Read This";
+        return "Client WAVE Can Read This";
     }
 
 }

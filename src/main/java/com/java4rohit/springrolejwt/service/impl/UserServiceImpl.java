@@ -1,28 +1,27 @@
-package com.akhianand.springrolejwt.service.impl;
+package com.java4rohit.springrolejwt.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import com.akhianand.springrolejwt.dao.UserDao;
-import com.akhianand.springrolejwt.model.Role;
-import com.akhianand.springrolejwt.model.User;
-import com.akhianand.springrolejwt.model.UserDto;
-import com.akhianand.springrolejwt.service.RoleService;
-import com.akhianand.springrolejwt.service.UserService;
+import com.java4rohit.springrolejwt.dao.UserDao;
+//import com.akhianand.springrolejwt.model.Role;
+import com.java4rohit.springrolejwt.model.User;
+import com.java4rohit.springrolejwt.model.UserDto;
+//import com.akhianand.springrolejwt.service.RoleService;
+import com.java4rohit.springrolejwt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service(value = "userService")
 public class UserServiceImpl implements UserDetailsService, UserService {
 
-    @Autowired
-    private RoleService roleService;
+//    @Autowired
+//    private RoleService roleService;
 
     @Autowired
     private UserDao userDao;
@@ -40,9 +39,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     private Set<SimpleGrantedAuthority> getAuthority(User user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-        user.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
-        });
+//        user.getRoles().forEach(role -> {
+//            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+//        });
+        authorities.add(new SimpleGrantedAuthority("ROLE_"+user.getClientId()));
         return authorities;
     }
 
@@ -63,16 +63,17 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         User nUser = user.getUserFromDto();
         //nUser.setPassword( bcryptEncoder.encode(user.getPassword()));
         nUser.setPassword(user.getPassword());
-        Role role = roleService.findByName("USER");
-        Set<Role> roleSet = new HashSet<>();
-        roleSet.add(role);
+       // Role role = roleService.findByName("USER");
 
-        if(nUser.getEmail().split("@")[1].equals("admin.edu")){
-            role = roleService.findByName("ADMIN");
-            roleSet.add(role);
-        }
+//        Set<Role> roleSet = new HashSet<>();
+//        roleSet.add(role);
+//
+//        if(nUser.getEmail().split("@")[1].equals("admin.edu")){
+//            role = roleService.findByName("ADMIN");
+//            roleSet.add(role);
+//        }
 
-        nUser.setRoles(roleSet);
+    //    nUser.setRoles(roleSet);
         return userDao.save(nUser);
     }
 }

@@ -1,4 +1,4 @@
-package com.akhianand.springrolejwt.model;
+package com.java4rohit.springrolejwt.model;
 
 public class LoginUser {
 

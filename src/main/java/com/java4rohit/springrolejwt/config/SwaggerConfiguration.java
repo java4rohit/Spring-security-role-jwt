@@ -1,4 +1,4 @@
-package com.akhianand.springrolejwt.config;
+package com.java4rohit.springrolejwt.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
